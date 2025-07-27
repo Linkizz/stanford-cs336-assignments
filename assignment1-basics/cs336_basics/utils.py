@@ -10,7 +10,7 @@ PAT = r"""'(?:[sdmt]|ll|ve|re)| ?\p{L}+| ?\p{N}+| ?[^\s\p{L}\p{N}]+|\s+(?!\S)|\s
 def get_pair_cnt(
     token_bytes: tuple[bytes, ...], 
     num: int=1, 
-    cnt: dict[tuple[bytes, bytes], int]=None
+    cnt: dict[tuple[bytes, bytes], int] | None = None
 ) -> dict[tuple[bytes, bytes], int]:
     """Counts occurrences of consecutive token bytes pairs.
 
