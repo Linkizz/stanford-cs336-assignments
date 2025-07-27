@@ -18,7 +18,6 @@ def train_bpe(
         if token_bytes not in vocab.values():
             vocab[idx] = token_bytes
             idx += 1
-    # print(vocab)
 
     # Pre-tokenization
     pre_cnt = pretokenize_cnt(text, PAT, special_tokens) # {(bytes1, bytes2, ...): cnt}
@@ -43,7 +42,7 @@ def train_bpe(
         pre_cnt = new_pre_cnt
         
         # Update merges and vocab
-        # print(f"merge [{i + 1}/{num_merges}]: {max_cnt_pair} -> {new_token}, {idx}")
+        print(f"merge [{i + 1}/{num_merges}]: {max_cnt_pair} -> {new_token}, {idx}")
         merges.append(max_cnt_pair)
         vocab[idx] = new_token
         idx += 1
@@ -53,7 +52,14 @@ def train_bpe(
     return vocab, merges
     
 if __name__ == "__main__":
+    import pickle
     input_path = "data/TinyStories/TinyStoriesV2-GPT4-valid.txt"
     vocab_size = 270
     special_tokens = ["<|endoftext|>"]
-    train_bpe(input_path, vocab_size, special_tokens)
+    vocab, merges = train_bpe(input_path, vocab_size, special_tokens)
+
+    with open("save_tokenizer/TinyStoriesV2-GPT4-valid-vocab.pickle", "wb") as f:
+        pickle.dump(vocab, f)
+
+    with open("save_tokenizer/TinyStoriesV2-GPT4-valid-merges.pickle", "wb") as f:
+        pickle.dump(merges, f)   
