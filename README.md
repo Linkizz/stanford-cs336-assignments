@@ -4,7 +4,7 @@ This is my personal implementation of assignments for [Stanford CS336 - Language
 
 ## TODO
 
-- [] **Assignment 1: Building a Transformer LM**
+- [ ] **Assignment 1: Building a Transformer LM**
   - [x] BPE tokenizer
   - [ ] Transformer language model architecture
   - [ ] Training language model
